@@ -1,5 +1,17 @@
+notificationConfiguration:
+  enabled: true
+  router: "localOnlyFallback"
+cloudbees-pipeline-policies:
+  config:
+    policies:
+    - action: "fail"
+      name: "Timeout policy"
+      rules:
+      - entirePipelineTimeoutRule:
+          maxTime: 30
 jenkins:
-  systemMessage: 'Jenkins configured using CloudBees CI CasC - v2'
+  authorizationStrategy: "cloudBeesRoleBasedAccessControl"
+  systemMessage: 'Jenkins configured using CloudBees CI CasC - v6'
 unclassified:
   hibernationConfiguration:
     activities:
@@ -70,3 +82,14 @@ credentials:
           id: "cloudbees-ci-workshop-github-app"
           owner: "chrisbowles-sarc-org"
           privateKey: "${gitHubAppPrivateKey}"
+cloudbees-slack-integration:
+  config:
+    slackToken: "${slackToken}"
+    slackWorkspace: "T010A455W77"
+    users:
+    - id: "cbowles-sarc"
+      jenkins: "cbowles-sarc"
+      optedIn: true
+      scmId: "cbowles-sarc"
+      slack: "REPLACE_USER_EMAIL"
+      slackWorkspace: "T010A455W77"
